@@ -1,0 +1,6 @@
+@WebApi_ReturnTypes_StatusCodes_HostAddress = http://localhost:5130
+
+GET {{WebApi_ReturnTypes_StatusCodes_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
