@@ -1,3 +1,5 @@
+﻿
+using WebApi_ReturnTypes_StatusCodes.Models;
 
 namespace WebApi_ReturnTypes_StatusCodes
 {
@@ -15,6 +17,26 @@ namespace WebApi_ReturnTypes_StatusCodes
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            //Register the Middleware
+            // Các phương thức được phép
+            var allowedMethods = new[] { "GET", "POST", "DELETE" };
+
+            // Sử dụng một lambda để khởi tạo middleware thủ công
+            app.Use(async (context, next) =>
+            {
+                var middleware = new HttpMethodMiddleware(next, allowedMethods);
+                await middleware.InvokeAsync(context);
+            });
+
+
+
+            // Registering the Filter Globally:
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add(new HttpMethodFilter(new[] { "GET", "POST", "DELETE" }));
+            });
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

@@ -4,3 +4,47 @@ GET {{WebApi_ReturnTypes_StatusCodes_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+@WebApi_ReturnTypes_StatusCodes_HostAddress = https://localhost:7166
+
+GET {{WebApi_ReturnTypes_StatusCodes_HostAddress}}/api/_200HTTPStatusCode
+Accept: application/json
+###
+
+### Get Employee with ID 1
+GET {{WebApi_ReturnTypes_StatusCodes_HostAddress}}/api/_200HTTPStatusCode/1
+Accept: application/json
+###
+
+### Create a New Employee
+POST {{WebApi_ReturnTypes_StatusCodes_HostAddress}}/api/_200HTTPStatusCode
+Content-Type: application/json
+
+{
+  "name": "Suresh",
+  "gender": "Male",
+  "age": 35,
+  "city": "BBSR",
+  "department": "HR"
+}
+
+###
+
+### Update Employee with ID 1
+PUT {{WebApi_ReturnTypes_StatusCodes_HostAddress}}/api/_200HTTPStatusCode/1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "name": "Suresh",
+    "gender": "Male",
+    "age": 35,
+    "city": "RKL",
+    "department": "HR"
+}
+
+###
+
+### Delete Employee with ID 1
+DELETE {{WebApi_ReturnTypes_StatusCodes_HostAddress}}/api/_200HTTPStatusCodeController/1
+###
