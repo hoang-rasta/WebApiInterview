@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi_ReturnTypes_StatusCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiBuiltinLogging", "WebApiBuiltinLogging\WebApiBuiltinLogging.csproj", "{AEFA1043-0699-4275-AECA-E9BC1C2E9FEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiImplementSerilog", "WebApiImplementSerilog\WebApiImplementSerilog.csproj", "{33D3C981-765F-4CB7-8A40-1BF5D242FB75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AEFA1043-0699-4275-AECA-E9BC1C2E9FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEFA1043-0699-4275-AECA-E9BC1C2E9FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEFA1043-0699-4275-AECA-E9BC1C2E9FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33D3C981-765F-4CB7-8A40-1BF5D242FB75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D3C981-765F-4CB7-8A40-1BF5D242FB75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D3C981-765F-4CB7-8A40-1BF5D242FB75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D3C981-765F-4CB7-8A40-1BF5D242FB75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
