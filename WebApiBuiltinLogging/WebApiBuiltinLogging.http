@@ -1,0 +1,6 @@
+@WebApiBuiltinLogging_HostAddress = http://localhost:5232
+
+GET {{WebApiBuiltinLogging_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
