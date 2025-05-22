@@ -19,7 +19,8 @@ namespace WebApiBasicAuthentication.Controllers
             _userService = userService;
         }
         // GET: api/User
-        [HttpGet]
+        [HttpGet("GetAllUsersAsync")]
+        [Authorize(Policy = "AdminOnly")] // Only Admin can view all users
         public async Task<ActionResult<IEnumerable<UserDTO>>> Get()
         {
             var users = await _userService.GetUsersAsync();
@@ -33,7 +34,10 @@ namespace WebApiBasicAuthentication.Controllers
             }).ToList();
             return Ok(userDtos);
         }
-        // GET: api/User/1
+
+        // GET: api/User/GetUserByIdAsync/1
+        [HttpGet("GetUserByIdAsync/{id}")]
+        //[Authorize(Policy = "AdminOrUser")]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> Get(int id)
         {

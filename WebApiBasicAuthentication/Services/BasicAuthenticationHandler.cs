@@ -90,16 +90,28 @@ namespace WebApiBasicAuthentication.Services
                     return AuthenticateResult.Fail("Invalid Username or Password");
                 }
 
-                // 6. Tạo Claims và Principal nếu xác thực thành công
-                // Nếu thông tin đăng nhập hợp lệ, tạo các "claims" (yêu cầu) cho người dùng.
-                // Claims mô tả người dùng (ID, email, vai trò, v.v.).
-                var claims = new[]
+
+                // *********** THAY ĐỔI MỚI CHO ROLE-BASED AUTHENTICATION ***********
+                // Lấy các vai trò liên kết với người dùng này để xây dựng các claim dựa trên vai trò.
+                var roles = user.UserRoles.Select(ur => ur.Role.Name).ToList();
+
+                // Tạo một danh sách các Claim sẽ đại diện cho danh tính của người dùng đã xác thực.
+                var claims = new List<Claim>
                 {
-                // Một định danh duy nhất cho người dùng.
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                // Email của người dùng, được lưu trữ dưới dạng "tên" của họ.
-                new Claim(ClaimTypes.Name, user.Email)
-            };
+                    // Claim này định danh duy nhất người dùng (sử dụng ID của họ).
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+
+                    // Claim này chứa địa chỉ email của người dùng.
+                    new Claim(ClaimTypes.Name, user.Email)
+                };
+
+                // Lặp qua từng vai trò của người dùng và thêm một claim vai trò tương ứng.
+                foreach (var role in roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role));
+                }
+                // ***************************************************************
+
 
                 // Tạo một ClaimsIdentity với các claims đã chỉ định và lược đồ xác thực.
                 // ClaimsIdentity nhóm các claims đó và chỉ định loại xác thực (ví dụ: "Basic", "Cookies", "Bearer", v.v.),

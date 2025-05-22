@@ -25,5 +25,8 @@ namespace WebApiBasicAuthentication.Models
         [Required]
         [MinLength(6)]
         public string Password { get; set; }
+
+        // Navigation property for the many-to-many relationship with Role
+        public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
     }
 }

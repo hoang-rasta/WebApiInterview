@@ -28,16 +28,16 @@ namespace WebApiBasicAuthentication
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            //builder.Services.AddSwaggerGen();
 
 
-            // THAY ĐỔI / THÊM CẤU HÌNH SWAGGER GEN TẠI ĐÂY
+            // THAY ĐỔI / THÊM CẤU HÌNH SWAGGER 
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BasicAuthenticationDemo API", Version = "v1" });
 
                 // Thêm định nghĩa bảo mật cho Basic Authentication
-                c.AddSecurityDefinition("BasicAuthentication", new OpenApiSecurityScheme
+                c.AddSecurityDefinition("BasicAuth", new OpenApiSecurityScheme
                 {
                     Name = "Basic Authentication",
                     Type = SecuritySchemeType.Http,
@@ -58,7 +58,7 @@ namespace WebApiBasicAuthentication
                             Reference = new OpenApiReference
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = "basic"
+                                Id = "BasicAuth"
                                 //Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "basic" }: Tham chiếu đến định nghĩa bảo mật mà bạn đã tạo với ID là "basic".
                             }
                         },
@@ -78,6 +78,20 @@ namespace WebApiBasicAuthentication
             // 4. Thêm Xác thực với BasicAuthenticationHandler của chúng ta
             builder.Services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
+            // Configure authorization and define role-based policies:
+            //   - "AdminOnly": Requires the "Admin" role.
+            //   - "UserOnly": Requires the "User" role.
+            //   - "AdminOrUser": Requires either "Admin" or "User" role.
+            //   - "AdminAndUser": Requires both "Admin" AND "User" roles (via a custom assertion).
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
+                options.AddPolicy("AdminOrUser", policy => policy.RequireRole("Admin", "User"));
+                options.AddPolicy("AdminAndUser", policy => policy.RequireAssertion(context =>
+                    context.User.IsInRole("Admin") && context.User.IsInRole("User")));
+            });
 
 
             var app = builder.Build();
