@@ -1,0 +1,43 @@
+﻿Configure Elasticsearch
+Open the config directory (e.g., D:\Elasticsearch\config\) and locate the elasticsearch.yml file. You can leave it as-is for default settings or modify certain parameters, such as:
+
+Enable Security:
+
+xpack.security.enabled: false (By default it is true, make it to false). When set to true, it requires an SSL certificate.
+
+
+Network settings (if you need to change the binding IP or port):
+
+network.host: 192.168.0.1
+http.port: 9200
+
+
+Then, run Elasticsearch by executing the elasticsearch.bat command in the command prompt
+
+
+Verify Installation
+Once Elasticsearch starts, open your web browser and navigate to the URL http://localhost:9200/
+
+
+Configure Kibana
+
+
+Set Elasticsearch Host:
+
+elasticsearch.hosts: [“http://localhost:9200”]
+
+Adjust Additional Settings (Optional): You can configure other settings as needed, such as:
+
+server.port (default is 5601)
+
+server.host (default is “localhost”)
+
+
+Modify node.options config file
+
+Remove or comment the following settings:
+
+## enable OpenSSL 3 legacy provider
+
+–openssl-legacy-provider
+

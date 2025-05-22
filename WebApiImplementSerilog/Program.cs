@@ -81,6 +81,14 @@ namespace WebApiImplementSerilog
 
 
 
+            // Thêm các dịch vụ vào container.
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    // Giữ nguyên property names trong quá trình JSON serialization/deserialization.
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                });
+
 
             var app = builder.Build();
 
