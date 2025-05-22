@@ -1,0 +1,6 @@
+@WebApiBasicAuthentication_HostAddress = https://localhost:7163
+
+GET {{WebApiBasicAuthentication_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
